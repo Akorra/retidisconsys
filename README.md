@@ -21,4 +21,6 @@
 
 ## Development Team
 - Filipe Marques [[Akorra](https://github.com/Akorra)]
+- Gustavo Portugal
+- António Banganho
 
