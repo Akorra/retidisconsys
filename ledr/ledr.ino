@@ -1,5 +1,4 @@
-const double m = -0.61092;
-const double b = 4.69897;
+#include "defs.hpp"
 
 unsigned long starTime = 0;
 int sensorValue = 0;
@@ -7,10 +6,6 @@ int stoploop = 1;
 double sensorVoltage = 0;
 double sensorLux = 0;
 double ledVoltage = 0;
-
-double volt2lux(double volt){
-  return pow(((5/volt)-1)*10000/pow(10,b),1/m);  
-}
 
 void setup() {
   // put your setup code here, to run once:
@@ -21,14 +16,14 @@ void setup() {
 
 void loop() {
   if(stoploop){
-    for(int i=0; i<=250; i+=50){
+    for(int i=0; i<=250; i+=10){
       analogWrite(10, i);
       starTime = micros();
-      while(micros()-starTime < 5000000){
+      while(micros()-starTime < 500000){
         ledVoltage = (double)i*0.015;
         sensorValue = analogRead(0);
-        sensorVoltage = (double)sensorValue*5.0/1023;
-        sensorLux = volt2lux(sensorVoltage);
+        sensorVoltage = (double) Defs::raw2volt(sensorValue);
+        sensorLux = Defs::volt2lux(sensorVoltage);
       
         Serial.print(micros());
         Serial.print(",");
