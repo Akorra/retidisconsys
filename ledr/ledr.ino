@@ -20,7 +20,7 @@ void loop() {
       analogWrite(10, i);
       starTime = micros();
       while(micros()-starTime < 500000){
-        ledVoltage = (double)i*0.015;
+        ledVoltage = (double)i*(5.0/255.0);
         sensorValue = analogRead(0);
         sensorVoltage = (double) Defs::raw2volt(sensorValue);
         sensorLux = Defs::volt2lux(sensorVoltage);
