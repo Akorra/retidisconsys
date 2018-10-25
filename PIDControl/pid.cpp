@@ -9,11 +9,11 @@ PID::PID(){
   this->K3 = KD/TS;
 }
 
-void PID::SetKi(double p){
-  this->Ki = p;
+void PID::SetKi(double i){
+  Ki = i;
 }
-void PID::SetKp(double i){
-  this->Kp = i;
+void PID::SetKp(double j){
+  Kp = j;
 }
 void PID::UpdateK2(){
   this->K2 = (this->Kp)*(this->Ki)*TS/2.0;

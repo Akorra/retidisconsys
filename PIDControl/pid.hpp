@@ -20,8 +20,8 @@ class PID{
 
   public:
     PID();
-    void SetKi(double gain);
-    void SetKp(double gain);
+    void SetKi(double i);
+    void SetKp(double j);
     void UpdateK2();
     void SetRef(double ref);
     double GetKi();

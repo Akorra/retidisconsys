@@ -19,15 +19,15 @@ double prev_err = 0;
 double p = 0;
 double i = 0;
 double d = 0;
-double value;
+double value = 50.0;
 
 bool antiWindup = true;
 bool forward = true;
 bool back = true;
 
 unsigned long startime;
-//unsigned long prevtime;
-//unsigned long vartime;
+unsigned long prevtime;
+unsigned long vartime;
 unsigned long w8 = 30;
 
 PID pid;
@@ -42,7 +42,7 @@ void setup() {
 
 void loop() {
   startime = millis();   
-  //if(startime-prevtime > w8){
+  if(startime-prevtime > w8){
     sensorValue = pid.AnalogReadAvg(LDR, 3);
     sensorVoltage = (double) sensorValue*5.0/1023.0;
     sensorLux = Defs::volt2lux(sensorVoltage);
@@ -84,14 +84,14 @@ void loop() {
       prev_err = err;
       prev_sensorLux = sensorLux;
     }
-    //prevtime = startime;
-    delay(w8-(millis()-startime)); 
-  //}
+    prevtime = startime; 
+  }
   
-  //while (Serial.available()) {
-  //  value = Serial.parseFloat();
-  //  pid.SetKp(value);
-  //  Serial.print("New Kp: ");
-  //  Serial.println(value);
-  //}
+  while (Serial.available()) {
+    value = Serial.parseFloat();
+    pid.SetRef(value);
+    //pid.UpdateK2();
+    Serial.print("New Kp: ");
+    Serial.println(value);
+  }
 }
