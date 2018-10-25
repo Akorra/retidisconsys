@@ -10,7 +10,7 @@ double sensorLux=0;
 unsigned long startime;
 unsigned long w8 = 30;
 
-PID pid(2.124, 22, 30);
+PID pid(2.124, 70, 30);
 
 void setup() {
   // put your setup code here, to run once:
