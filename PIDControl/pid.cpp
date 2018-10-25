@@ -6,6 +6,7 @@ PID::PID(){
   this->Ki = KI;
   this->Kp = KP;
   this->K2 = KP*KI*TS/2.0;
+  this->K3 = KD/TS;
 }
 
 void PID::SetKi(double p){
@@ -88,6 +89,6 @@ double PID::IntegralControl(double integral, double err, double prev_err){
   return integral + ((this->K2)*(err+prev_err));
 }
 
-double PID::DerivativeControl(){
-  return 0.0;  
+double PID::DerivativeControl(double y, double prev_y){
+  return (this->K3)*(y-prev_y);  
 }

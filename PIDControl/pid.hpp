@@ -3,11 +3,11 @@
 
 #include "defs.hpp"
 
-#define KI 1.0
-#define KD 0.0
+#define KI 10.0
+#define KD 0.001
 #define KP 1.65
 #define KF 2.124
-#define KS 0.0
+#define KS 0.05
 #define TS 0.03
 
 class PID{
@@ -16,6 +16,7 @@ class PID{
     double Ki;
     double Kp;
     double K2; 
+    double K3; 
 
   public:
     PID();
@@ -35,7 +36,7 @@ class PID{
     double FeedForward();
     double ProportionalControl(double error);
     double IntegralControl(double integral, double err, double prev_err);
-    double DerivativeControl();
+    double DerivativeControl(double y, double prev_y);
 };
 
 #endif
