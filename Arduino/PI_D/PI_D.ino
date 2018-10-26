@@ -62,17 +62,13 @@ void loop() {
       p = pid.ProportionalControl(err);
       i = pid.IntegralControl(i, err, prev_err);
       if(antiWindup){
-        i += pid.AntiWindup(u, u_sat);
+        i += pid.AntiWindup(u);
       }
       d = pid.DerivativeControl(sensorLux, prev_sensorLux);
       u = round(p + i - d + feedforward);
-      u_sat = pid.PmwLimiter(u);
-      analogWrite(LED, u_sat);
+      analogWrite(LED, pid.PmwLimiter(u));
 
       //print variables
-      Serial.print("Kp: ");
-      Serial.print((double) pid.GetKp());
-      Serial.print("; ");
       Serial.print("Ref: ");
       Serial.print((double) pid.GetRef());
       Serial.print("; ");
